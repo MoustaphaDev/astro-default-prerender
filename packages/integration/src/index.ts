@@ -66,3 +66,24 @@ async function wait(ms) {
         }, ms);
     });
 }
+
+const dateTimeFormat = new Intl.DateTimeFormat([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+});
+
+function logger(type: 'info' | 'warn' | 'error', message: string) {
+    const date = dateTimeFormat.format(new Date());
+    const messageColor =
+        type === 'error'
+            ? kleur.red
+            : type === 'warn'
+            ? kleur.yellow
+            : kleur.white;
+    console.log(
+        `${kleur.gray(date)} ${kleur.bold(
+            '[astro-default-preprender]'
+        )} ${messageColor(message)}`
+    );
+}
