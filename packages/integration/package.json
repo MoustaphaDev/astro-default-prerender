@@ -25,7 +25,8 @@
     "homepage": "https://github.com/MoustaphaDev/astro-default-prerender/tree/main/packages/astro-default-prerender/readme.md",
     "files": [
         "dist",
-        "CHANGELOG.md"
+        "CHANGELOG.md",
+        "package.json"
     ],
     "keywords": [
         "withastro",

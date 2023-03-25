@@ -1,7 +1,7 @@
 import type { AstroIntegration } from 'astro';
+import type { Plugin } from 'vite';
 import { parse } from '@astrojs/compiler';
 import { walk, is, serialize } from '@astrojs/compiler/utils';
-import type { Plugin } from 'vite';
 import kleur from 'kleur';
 
 export default function integration(): AstroIntegration {
