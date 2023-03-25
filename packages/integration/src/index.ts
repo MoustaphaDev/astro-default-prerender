@@ -20,7 +20,7 @@ export default function integration(): AstroIntegration {
 function getVitePluginInjector(): Plugin {
     let isHooked = false;
     return {
-        name: 'vite-plugin-astro-prerender-injector',
+        name: 'vite-plugin-astro-default-prerender-injector',
         configResolved(resolved) {
             if (isHooked) return;
             (resolved.plugins as Plugin[]).unshift(getVitePlugin());
@@ -31,7 +31,7 @@ function getVitePluginInjector(): Plugin {
 
 function getVitePlugin(): Plugin {
     return {
-        name: 'vite-plugin-astro-prerender',
+        name: 'vite-plugin-astro-default-prerender',
         async transform(code, id) {
             if (!id.endsWith('.astro')) return;
             const { ast } = await parse(code);
