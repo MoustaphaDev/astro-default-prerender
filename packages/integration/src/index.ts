@@ -5,30 +5,40 @@ import { walk, is, serialize } from '@astrojs/compiler/utils';
 import kleur from 'kleur';
 import { type ExportSpecifier, init, parse as parseESM } from 'es-module-lexer';
 
-export default function integration(): AstroIntegration {
+type IntegrationOptions = {
+    silenceLogs?: boolean;
+};
+export default function integration(
+    { silenceLogs = false }: IntegrationOptions = {
+        silenceLogs: false,
+    }
+): AstroIntegration {
     return {
         name: 'astro-default-prerender',
         hooks: {
             'astro:config:setup': async ({ updateConfig }) => {
                 updateConfig({
-                    vite: { plugins: [getVitePluginInjector()] },
+                    vite: {
+                        plugins: [getVitePluginInjector({ silenceLogs })],
+                    },
                 });
             },
+            'astro:config:done': async ({ config }) => {},
         },
     };
 }
 
-function getVitePluginInjector(): Plugin {
-    let isHooked = false;
+function getVitePluginInjector(opts: IntegrationOptions): Plugin {
     return {
         name: 'vite-plugin-astro-default-prerender-injector',
         configResolved(resolved) {
             // TODO: limit this to only run once
+            (resolved.plugins as Plugin[]).unshift(getVitePlugin(opts));
         },
     };
 }
 
-function getVitePlugin(): Plugin {
+function getVitePlugin(opts: IntegrationOptions): Plugin {
     return {
         name: 'vite-plugin-astro-default-prerender',
         async transform(code, id) {
@@ -40,19 +50,31 @@ function getVitePlugin(): Plugin {
             walk(ast, async (node) => {
                 if (foundFrontmatter) return;
                 if (is.frontmatter(node)) {
+                    log(
+                        'info',
+                        'Found frontmatter, injecting `prerender` export',
+                        opts.silenceLogs
+                    );
                     foundFrontmatter = true;
                     // could regexes be enough here?
                     let exports: readonly ExportSpecifier[] | undefined;
                     try {
                         [, exports] = parseESM(node.value);
                     } catch (e) {
+                        log('error', 'Error parsing ESM exports, skipping');
                         return;
                     }
                     // if there's a `prerender` export, return
                     if (exports.some((e) => e.n === 'prerender')) {
+                        log(
+                            'warn',
+                            'Found a `prerender` export, skipping',
+                            opts.silenceLogs
+                        );
                         return;
                     }
                     node.value = `\nexport const prerender = true;\n${node.value}`;
+                    log('info', 'Added `prerender` export to frontmatter');
                     didChange = true;
                 }
             });
@@ -83,17 +105,25 @@ const dateTimeFormat = new Intl.DateTimeFormat([], {
     second: '2-digit',
 });
 
-function logger(type: 'info' | 'warn' | 'error', message: string) {
+function log(
+    type: 'info' | 'warn' | 'error',
+    message: string,
+    /**
+     * If true, don't log anything. Errors should not be silenced.
+     */
+    silent: boolean = false
+) {
+    if (silent) return;
     const date = dateTimeFormat.format(new Date());
     const messageColor =
         type === 'error'
             ? kleur.red
             : type === 'warn'
             ? kleur.yellow
-            : kleur.white;
+            : kleur.cyan;
     console.log(
-        `${kleur.gray(date)} ${kleur.bold(
-            '[astro-default-preprender]'
+        `${kleur.gray(date)} ${messageColor(
+            kleur.bold('[astro-default-preprender]')
         )} ${messageColor(message)}`
     );
 }
