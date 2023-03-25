@@ -1,6 +1,31 @@
+import type { AstroIntegration } from 'astro';
 import { parse } from '@astrojs/compiler';
 import { walk, is, serialize } from '@astrojs/compiler/utils';
 import type { Plugin } from 'vite';
+
+export default function integration(): AstroIntegration {
+    return {
+        name: 'astro-default-prerender',
+        hooks: {
+            'astro:config:setup': async ({ updateConfig }) => {
+                updateConfig(getVitePluginInjector());
+            },
+        },
+    };
+}
+
+function getVitePluginInjector(): Plugin {
+    let isHooked = false;
+    return {
+        name: 'vite-plugin-astro-prerender-injector',
+        configResolved(resolved) {
+            if (isHooked) return;
+            console.log('run!!!!!');
+            (resolved.plugins as Plugin[]).unshift(getVitePlugin());
+            isHooked = true;
+        },
+    };
+}
 
 function getVitePlugin(): Plugin {
     return {
