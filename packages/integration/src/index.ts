@@ -2,13 +2,16 @@ import type { AstroIntegration } from 'astro';
 import { parse } from '@astrojs/compiler';
 import { walk, is, serialize } from '@astrojs/compiler/utils';
 import type { Plugin } from 'vite';
+import kleur from 'kleur';
 
 export default function integration(): AstroIntegration {
     return {
         name: 'astro-default-prerender',
         hooks: {
             'astro:config:setup': async ({ updateConfig }) => {
-                updateConfig(getVitePluginInjector());
+                updateConfig({
+                    vite: { plugins: [getVitePluginInjector()] },
+                });
             },
         },
     };
@@ -20,7 +23,6 @@ function getVitePluginInjector(): Plugin {
         name: 'vite-plugin-astro-prerender-injector',
         configResolved(resolved) {
             if (isHooked) return;
-            console.log('run!!!!!');
             (resolved.plugins as Plugin[]).unshift(getVitePlugin());
             isHooked = true;
         },
@@ -39,10 +41,9 @@ function getVitePlugin(): Plugin {
                 if (is.frontmatter(node)) {
                     foundFrontmatter = true;
                     // TODO: use es-module-lexer to catch false possitives?
-                    if (node.value.includes('export const prerender = true;'))
-                        return;
-                    node.value += `export const prerender = true;
-                console.log("Hey!")`;
+                    // if (node.value.includes('export const prerender = true;'))
+                    //     return;
+                    node.value += `export const prerender = true;`;
                     // console.log({ node, ast: JSON.stringify(ast, null, 2) });
                 }
             });
