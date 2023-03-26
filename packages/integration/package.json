@@ -22,7 +22,7 @@
     "bugs": {
         "url": "https://github.com/MoustaphaDev/astro-default-prerender/issues"
     },
-    "homepage": "https://github.com/MoustaphaDev/astro-default-prerender/tree/main/packages/astro-default-prerender/readme.md",
+    "homepage": "https://github.com/MoustaphaDev/astro-default-prerender/tree/main/packages/integration/README.md",
     "files": [
         "dist",
         "CHANGELOG.md",

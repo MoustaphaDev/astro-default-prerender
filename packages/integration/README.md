@@ -39,7 +39,7 @@
 <!-- TOC end --><!-- Generated with https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one -->
 
 ## Why `astro-default-prerender`?
-Astro's prerendering is a great feature that allows you to mix static and dynamic pages. However, it can be a bit tedious to add `export const prerender = true` to your pages, especially if you have a lot of static pages and only a few dynamic ones.
+Astro's hybrid rendering is a great feature that allows you to mix static and dynamic pages. However, it can be a bit tedious to add `export const prerender = true` to your pages, especially if you have a lot of static pages and only a few dynamic ones.
 
 `astro-default-prerender` is an [Astro](https://astro.build/) integration that allows you to *opt-out* of prerendering instead of *opting-in*. This means that all your pages will be prerendered by default, unless you explicitly set `export const prerender = false` on a page.
 
