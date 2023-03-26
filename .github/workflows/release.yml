@@ -41,7 +41,7 @@ jobs:
                   node-version: 16
                   cache: 'pnpm'
             - if: ${{ steps.cache-node.outputs.cache-hit != 'true' }}
-                run: pnpm install
+              run: pnpm install
 
             - name: Build Packages
               run: pnpm run build
