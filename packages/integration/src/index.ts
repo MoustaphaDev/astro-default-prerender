@@ -5,6 +5,7 @@ import { walk, is, serialize } from '@astrojs/compiler/utils';
 import kleur from 'kleur';
 import { type ExportSpecifier, init, parse as parseESM } from 'es-module-lexer';
 
+// test branch protection rule
 type IntegrationOptions = {
     silenceLogs?: boolean;
 };
