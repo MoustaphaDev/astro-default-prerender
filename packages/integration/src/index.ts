@@ -84,6 +84,7 @@ function createVitePluginInjector(opts: IntegrationOptions) {
             async transform(code, id) {
                 if (!id.endsWith('.astro')) return;
 
+                // use regexes to parse frontmatter?
                 const { ast } = await parse(code);
                 let foundFrontmatter = false;
                 let didChange = false;
@@ -98,7 +99,6 @@ function createVitePluginInjector(opts: IntegrationOptions) {
                             opts.silenceLogs
                         );
                         foundFrontmatter = true;
-                        // could regexes be enough here?
                         let exports: readonly ExportSpecifier[] | undefined;
                         try {
                             [, exports] = parseESM(node.value);
