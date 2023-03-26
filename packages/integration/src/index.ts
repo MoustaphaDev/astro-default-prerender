@@ -8,11 +8,12 @@ import { type ExportSpecifier, init, parse as parseESM } from 'es-module-lexer';
 type IntegrationOptions = {
     silenceLogs?: boolean;
 };
-export default function integration(
-    { silenceLogs = false }: IntegrationOptions = {
-        silenceLogs: false,
-    }
-): AstroIntegration {
+const defaultOptions: IntegrationOptions = {
+    silenceLogs: false,
+};
+export default function integration({
+    silenceLogs = false,
+}: IntegrationOptions = defaultOptions): AstroIntegration {
     const { setAstroConfig, getVitePluginInjector } = createVitePluginInjector({
         silenceLogs,
     });
