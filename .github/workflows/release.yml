@@ -50,9 +50,9 @@ jobs:
               id: changesets
               uses: changesets/action@v1
 
+              if: ${{ github.event_name != 'pull_request' }}
               with:
                   # Note: pnpm install after versioning is necessary to refresh lockfile
-                  if: ${{ github.event_name != 'pull_request' }}
                   version: pnpm run version
                   publish: pnpm exec changeset publish
                   commit: '[ci] release'
