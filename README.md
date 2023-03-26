@@ -1,4 +1,3 @@
-<!-- Ignore the comments, they are for the most placeholders for ideas -->
 <h1 align="center">Astro Default Prerender 🚀</h1>
 <h4 align="center">Prerender all your Astro pages by default</h4>
 
@@ -6,17 +5,14 @@
     <a href="https://github.com/MoustaphaDev/astro-default-prerender/blob/master/LICENSE" target="_blank">
         <img src="https://img.shields.io/github/license/MoustaphaDev/astro-default-prerender?style=flat-square" alt="astro-default-prerender licence" />
     </a>
-    <a href="https://github.com/MoustaphaDev/astro-default-prerender/fork" target="_blank">
-        <img src="https://img.shields.io/github/forks/MoustaphaDev/astro-default-prerender?style=flat-square" alt="astro-default-prerender forks"/>
-    </a>
-    <a href="https://github.com/MoustaphaDev/astro-default-prerender/stargazers" target="_blank">
-        <img src="https://img.shields.io/github/stars/MoustaphaDev/astro-default-prerender?style=flat-square" alt="astro-default-prerender stars"/>
-    </a>
     <a href="https://github.com/MoustaphaDev/astro-default-prerender/issues" target="_blank">
         <img src="https://img.shields.io/github/issues/MoustaphaDev/astro-default-prerender?style=flat-square" alt="astro-default-prerender issues"/>
     </a>
     <a href="https://github.com/MoustaphaDev/astro-default-prerender/pulls" target="_blank">
         <img src="https://img.shields.io/github/issues-pr/MoustaphaDev/astro-default-prerender?style=flat-square" alt="astro-default-prerender pull-requests"/>
+    </a>
+    <a href="https://github.com/MoustaphaDev/astro-default-prerender/stargazers" target="_blank">
+        <img src="https://img.shields.io/github/stars/MoustaphaDev/astro-default-prerender?style=flat-square" alt="astro-default-prerender stars"/>
     </a>
     <a href="https://npmjs.com/package/astro-default-prerender" target="_blank">
         <img src="https://img.shields.io/npm/dt/astro-default-prerender.svg" alt="astro-default-prerender total downloads" />
@@ -38,13 +34,14 @@
   - [🚀 Demo](#-demo)
   - [💻 Quickstart](#-quickstart)
   - [🛡️ License](#️-license)
+  - [🗺️ Roadmap](#️-roadmap)
   - [🙏 Support](#-support)
 <!-- TOC end --><!-- Generated with https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one -->
 
 ## Why `astro-default-prerender`?
-Astro's prerendering is a great feature that allows you to mix static and dynamic content. However, it can be a bit tedious to add `export const prerender = true` to all your pages. This is where `astro-default-prerender` comes in.
+Astro's prerendering is a great feature that allows you to mix static and dynamic pages. However, it can be a bit tedious to add `export const prerender = true` to your pages, especially if you have a lot of static pages and only a few dynamic ones.
 
-`astro-default-prerender` is an [Astro](https://astro.build/) integration that allows you to prerender your pages by default. This means that you don't have to add `export const prerender = true` to your pages to prerender them. This plugin will do it for you.
+`astro-default-prerender` is an [Astro](https://astro.build/) integration that allows you to *opt-out* of prerendering instead of *opting-in*. This means that all your pages will be prerendered by default, unless you explicitly set `export const prerender = false` on a page.
 
 <strong style="font-size:2rem">Many Thanks to all the `Stargazers`</strong>
 
@@ -74,6 +71,11 @@ That's it! Now all your pages will be prerendered by default. You can still over
 
 ## 🛡️ License
 This project is licensed under the MIT License - see the [`LICENSE`](LICENSE) file for details.
+
+## 🗺️ Roadmap
+These are the features that are planned for the future. If you have any suggestions, please open an issue.
+- [ ] Prerendering endpoints
+- [ ] Excluding pages/directories from prerendering with a glob pattern
 
 ## 🙏 Support
 
