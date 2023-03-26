@@ -1,5 +1,11 @@
 # astro-default-prerender
 
+## 0.0.4
+
+### Patch Changes
+
+- [#12](https://github.com/MoustaphaDev/astro-default-prerender/pull/12) [`f7f895b`](https://github.com/MoustaphaDev/astro-default-prerender/commit/f7f895b4d7f0ca5c2cecb2d7235b9d834b9f480a) Thanks [@MoustaphaDev](https://github.com/MoustaphaDev)! - Tidy up reamde
+
 ## 0.0.3
 
 ### Patch Changes
