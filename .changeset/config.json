@@ -8,5 +8,5 @@
         "@changesets/changelog-github",
         { "repo": "MoustaphaDev/astro-default-prerender" }
     ],
-    "ignore": ["@example/*"]
+    "ignore": ["demo"]
 }
