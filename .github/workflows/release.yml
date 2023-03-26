@@ -49,8 +49,10 @@ jobs:
             - name: Create Release Pull Request or Publish
               id: changesets
               uses: changesets/action@v1
+
               with:
                   # Note: pnpm install after versioning is necessary to refresh lockfile
+                  if: ${{ github.event_name != 'pull_request' }}
                   version: pnpm run version
                   publish: pnpm exec changeset publish
                   commit: '[ci] release'
