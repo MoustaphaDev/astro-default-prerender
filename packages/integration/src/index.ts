@@ -85,7 +85,8 @@ function createVitePluginInjector(opts: IntegrationOptions) {
             async transform(code, id) {
                 if (!id.endsWith('.astro')) return;
 
-                // TODO: Actually no need to use use the compiler
+                // TODO: Remove compiler usage
+                // Actually no need to use use the compiler
                 // or push the plugin at the top of the plugins array
                 // the compiled output of astro components preserves
                 // exports
