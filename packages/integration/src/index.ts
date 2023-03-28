@@ -85,7 +85,10 @@ function createVitePluginInjector(opts: IntegrationOptions) {
             async transform(code, id) {
                 if (!id.endsWith('.astro')) return;
 
-                // use regexes to parse frontmatter?
+                // TODO: Actually no need to use use the compiler
+                // or push the plugin at the top of the plugins array
+                // the compiled output of astro components preserves
+                // exports
                 const { ast } = await parse(code);
                 let foundFrontmatter = false;
                 let didChange = false;
